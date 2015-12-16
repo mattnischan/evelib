@@ -2432,7 +2432,8 @@
       "fx/System.Core ",
       "fx/System.Runtime.Serialization ",
       "fx/System.Configuration ",
-      "fx/System.Xml "
+      "fx/System.Xml ",
+      "fx/System.Net.Http "
     ],
     "DNXCore,Version=v5.0": [
       "System.Collections >= 4.0.10",
@@ -2446,7 +2447,8 @@
       "System.Net.Requests >= 4.0.10",
       "System.Diagnostics.Contracts >= 4.0.0",
       "System.Xml.XmlDocument >= 4.0.0",
-      "Microsoft.Framework.ConfigurationModel.Xml >= 1.0.0-beta4"
+      "Microsoft.Framework.ConfigurationModel.Xml >= 1.0.0-beta4",
+      "System.IO >= 4.0.10"
     ]
   }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace eZet.EveLib.Core.RequestHandlers {
@@ -16,8 +18,8 @@ namespace eZet.EveLib.Core.RequestHandlers {
         /// <param name="uri">URI to request</param>
         /// <returns>The image data</returns>
         public Task<byte[]> RequestImageDataAsync(Uri uri) {
-            var client = new WebClient();
-            return client.DownloadDataTaskAsync(uri);
+            var client = new HttpClient();
+            return client.GetByteArrayAsync(uri);
         }
 
         /// <summary>
@@ -26,9 +28,14 @@ namespace eZet.EveLib.Core.RequestHandlers {
         /// <param name="uri">URI to request</param>
         /// <param name="file">File to save image as.</param>
         /// <returns>The task</returns>
-        public Task RequestImageAsync(Uri uri, string file) {
-            var client = new WebClient();
-            return client.DownloadFileTaskAsync(uri, file);
+        public async Task RequestImageAsync(Uri uri, string file) {
+            var client = new HttpClient();
+            var response = await client.GetStreamAsync(uri).ConfigureAwait(false);
+
+            using (var fileStream = File.Open(file, FileMode.Create))
+            {
+                await response.CopyToAsync(fileStream).ConfigureAwait(false);
+            }
         }
     }
 }
