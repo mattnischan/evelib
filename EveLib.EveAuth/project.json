@@ -1,0 +1,20 @@
+{
+  "version": "3.1.0-beta-*",
+  "dependencies": {
+    "Newtonsoft.Json": "7.0.1",
+    "EveLib.Core": ""
+  },
+  "frameworks": {
+    "net45": {
+      "frameworkAssemblies": {
+        "System.Runtime.Serialization": ""
+      }
+    },
+    "dnxcore5": {
+      "dependencies": {
+        "System.Runtime.Serialization.Primitives": "4.0.10",
+        "System.Diagnostics.TraceSource": "4.0.0-*"
+      }
+    }
+  }
+}

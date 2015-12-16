@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "EveLib.Core": "",
+    "EveLib.EveAuth": ""
+  },
+  "frameworks": {
+    "net45": { },
+    "dnxcore5": {
+      "dependencies": {
+        "System.Net.Http": "4.0.0",
+        "System.Net.Requests": "4.0.10",
+        "System.Net.Primitives": "4.0.10",
+        "System.Diagnostics.TraceSource": "4.0.0-*"
+      }
+    }
+  }
+}

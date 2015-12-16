@@ -14,7 +14,8 @@ namespace eZet.EveLib.Core.Cache {
     ///     Simple plain file cache implementation
     /// </summary>
     public class EveLibFileCache : IEveLibCache {
-        private static readonly SHA1CryptoServiceProvider Sha1 = new SHA1CryptoServiceProvider();
+
+        private static readonly SHA1 Sha1 = SHA1.Create();
 
         private readonly IDictionary<string, DateTime> _register = new Dictionary<string, DateTime>();
 

@@ -9,10 +9,6 @@ namespace eZet.EveLib.Core {
     ///     Provides configuration and constants for the library.
     /// </summary>
     public static class Config {
-        /// <summary>
-        ///     Directory Separator
-        /// </summary>
-        public static readonly string Separator = Path.DirectorySeparatorChar.ToString(CultureInfo.InvariantCulture);
 
         /// <summary>
         ///     relCachePath to ApplicationData folder.
