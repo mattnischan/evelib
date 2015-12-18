@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class CalendarEventAttendees.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class CalendarEventAttendees {
         /// <summary>
@@ -33,7 +32,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class Attendee.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Attendee {
             /// <summary>

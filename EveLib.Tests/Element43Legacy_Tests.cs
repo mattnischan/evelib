@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using eZet.EveLib.Element43Module;
 using eZet.EveLib.Element43Module.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
+using System;
 
 namespace eZet.EveLib.Test {
-    [TestClass]
     public class Element43Legacy_Tests {
         private const int RegionId = 10000002;
         private const int TypeId = 34;
@@ -18,20 +18,20 @@ namespace eZet.EveLib.Test {
             _validOptions.Region = RegionId;
         }
 
-        [TestMethod]
+        [Fact]
         public void GetMarketStat_ValidRequest_ValidResponse() {
             MarketStatResponse res = _api.GetMarketStat(_validOptions);
             Element43MarketStatItem entry = res.Result.First();
-            Assert.AreEqual(TypeId, entry.TypeId);
-            Assert.AreNotEqual(0, entry.SellOrders.Average);
-            Assert.AreNotEqual(0, entry.SellOrders.Volume);
-            Assert.AreNotEqual(0, entry.SellOrders.Max);
-            Assert.AreNotEqual(0, entry.SellOrders.Min);
-            Assert.AreNotEqual(0, entry.SellOrders.StdDev);
-            Assert.AreNotEqual(0, entry.SellOrders.Median);
-            Assert.AreNotEqual(0, entry.SellOrders.Percentile);
-            Assert.AreNotEqual(0, entry.LastUpdate);
-            Assert.AreNotEqual(0, entry.VolumeLastWeek);
+            Assert.Equal(TypeId, entry.TypeId);
+            Assert.NotEqual(0, entry.SellOrders.Average);
+            Assert.NotEqual(0, entry.SellOrders.Volume);
+            Assert.NotEqual(0, entry.SellOrders.Max);
+            Assert.NotEqual(0, entry.SellOrders.Min);
+            Assert.NotEqual(0, entry.SellOrders.StdDev);
+            Assert.NotEqual(0, entry.SellOrders.Median);
+            Assert.NotEqual(0, entry.SellOrders.Percentile);
+            Assert.NotEqual(default(DateTime), entry.LastUpdate);
+            Assert.NotEqual(0, entry.VolumeLastWeek);
         }
     }
 }

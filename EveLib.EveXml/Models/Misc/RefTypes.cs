@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class ReferenceTypes.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class ReferenceTypes {
         /// <summary>
@@ -32,7 +31,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
         /// <summary>
         ///     Class ReferenceType.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class ReferenceType {
             /// <summary>

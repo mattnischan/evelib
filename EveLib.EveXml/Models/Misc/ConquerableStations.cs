@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class ConquerableStations.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class ConquerableStations {
         /// <summary>
@@ -32,7 +31,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
         /// <summary>
         ///     Class StationData.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class StationData {
             /// <summary>

@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Represents a IndustryJobs response
     /// </summary>
-    [Serializable]
     [XmlRoot("result")]
     public class IndustryJobs {
         /// <summary>
@@ -33,7 +32,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Represents a industry job
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class NewIndustryJob {
             /// <summary>

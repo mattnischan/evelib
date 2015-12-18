@@ -1,10 +1,9 @@
 ﻿using System.Linq;
 using eZet.EveLib.EveCentralModule;
 using eZet.EveLib.EveCentralModule.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace eZet.EveLib.Test {
-    [TestClass]
     public class EveCentral_Tests {
         private const int RegionId = 10000002;
         private const int TypeId = 34;
@@ -20,64 +19,64 @@ namespace eZet.EveLib.Test {
             _validOptions.Regions.Add(RegionId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetMarketStat_ValidRequest_ValidResponse() {
             var options = new EveCentralOptions() {System = 30000142};
             options.Items.Add(34);
             MarketStatResponse res = _api.GetMarketStat(options);
             EveCentralMarketStatItem entry = res.Result.First();
-            Assert.AreEqual(TypeId, entry.TypeId);
-            Assert.AreNotEqual(0, entry.All.Average);
-            Assert.AreNotEqual(0, entry.All.Volume);
-            Assert.AreNotEqual(0, entry.All.Max);
-            Assert.AreNotEqual(0, entry.All.Min);
-            Assert.AreNotEqual(0, entry.All.StdDev);
-            Assert.AreNotEqual(0, entry.All.Median);
-            Assert.AreNotEqual(0, entry.All.Percentile);
+            Assert.Equal(TypeId, entry.TypeId);
+            Assert.NotEqual(0, entry.All.Average);
+            Assert.NotEqual(0, entry.All.Volume);
+            Assert.NotEqual(0, entry.All.Max);
+            Assert.NotEqual(0, entry.All.Min);
+            Assert.NotEqual(0, entry.All.StdDev);
+            Assert.NotEqual(0, entry.All.Median);
+            Assert.NotEqual(0, entry.All.Percentile);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetQuicklook_ValidRequest_ValidReseponse() {
             QuickLookResponse res = _api.GetQuicklook(_validOptions);
             QuicklookResult entry = res.Result;
             EveCentralQuicklookOrder order = entry.BuyOrders.First();
-            Assert.AreEqual(TypeId, entry.TypeId);
-            Assert.AreEqual("Tritanium", entry.TypeName);
-            Assert.AreEqual(HourLimit, entry.HourLimit);
-            Assert.AreEqual(MinQty, entry.MinQuantity);
-            Assert.AreNotEqual("", entry.Regions.First());
-            Assert.AreNotEqual(0, order.MinVolume);
-            Assert.AreNotEqual(0, order.OrderId);
-            Assert.AreNotEqual(0, order.VolRemaining);
-            Assert.AreNotEqual(0, order.Price);
-            Assert.AreNotEqual(0, order.SecurityRating);
-            Assert.AreNotEqual(0, order.StationId);
-            Assert.AreNotEqual("", order.StationName);
-            Assert.AreNotEqual("", order.Expires);
-            Assert.AreNotEqual("", order.ReportedTime);
+            Assert.Equal(TypeId, entry.TypeId);
+            Assert.Equal("Tritanium", entry.TypeName);
+            Assert.Equal(HourLimit, entry.HourLimit);
+            Assert.Equal(MinQty, entry.MinQuantity);
+            Assert.NotEqual("", entry.Regions.First());
+            Assert.NotEqual(0, order.MinVolume);
+            Assert.NotEqual(0, order.OrderId);
+            Assert.NotEqual(0, order.VolRemaining);
+            Assert.NotEqual(0, order.Price);
+            Assert.NotEqual(0, order.SecurityRating);
+            Assert.NotEqual(0, order.StationId);
+            Assert.NotEqual("", order.StationName);
+            Assert.NotEqual("", order.Expires);
+            Assert.NotEqual("", order.ReportedTime);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetQuicklookPath_ValidRequest_ValidResponse() {
             QuickLookResponse res = _api.GetQuicklookPath("Jita", "Amarr", 34, _validOptions);
             QuicklookResult entry = res.Result;
             EveCentralQuicklookOrder order = entry.BuyOrders.First();
-            Assert.AreEqual(TypeId, entry.TypeId);
-            Assert.AreEqual("Tritanium", entry.TypeName);
-            Assert.AreEqual(HourLimit, entry.HourLimit);
-            Assert.AreEqual(MinQty, entry.MinQuantity);
-            Assert.AreNotEqual(0, order.MinVolume);
-            Assert.AreNotEqual(0, order.OrderId);
-            Assert.AreNotEqual(0, order.VolRemaining);
-            Assert.AreNotEqual(0, order.Price);
-            Assert.AreNotEqual(0, order.SecurityRating);
-            Assert.AreNotEqual(0, order.StationId);
-            Assert.AreNotEqual("", order.StationName);
-            Assert.AreNotEqual("", order.Expires);
-            Assert.AreNotEqual("", order.ReportedTime);
+            Assert.Equal(TypeId, entry.TypeId);
+            Assert.Equal("Tritanium", entry.TypeName);
+            Assert.Equal(HourLimit, entry.HourLimit);
+            Assert.Equal(MinQty, entry.MinQuantity);
+            Assert.NotEqual(0, order.MinVolume);
+            Assert.NotEqual(0, order.OrderId);
+            Assert.NotEqual(0, order.VolRemaining);
+            Assert.NotEqual(0, order.Price);
+            Assert.NotEqual(0, order.SecurityRating);
+            Assert.NotEqual(0, order.StationId);
+            Assert.NotEqual("", order.StationName);
+            Assert.NotEqual("", order.Expires);
+            Assert.NotEqual("", order.ReportedTime);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetHistory_ValidRequest_ValidResponse() {
             //api.GetHistory();
         }

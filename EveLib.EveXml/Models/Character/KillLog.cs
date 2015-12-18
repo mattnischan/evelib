@@ -22,7 +22,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class KillLog.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class KillLog {
         /// <summary>
@@ -35,7 +34,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class Attacker.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Attacker {
             /// <summary>
@@ -126,7 +124,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class Item.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Item {
             /// <summary>
@@ -175,7 +172,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class Kill.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Kill : IXmlSerializable {
             /// <summary>
@@ -281,7 +277,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class Victim.
         /// </summary>
-        [Serializable]
         [XmlRoot("victim")]
         public class Victim {
             /// <summary>

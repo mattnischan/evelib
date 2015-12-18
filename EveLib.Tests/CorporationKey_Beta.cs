@@ -2,10 +2,9 @@
 using eZet.EveLib.EveXmlModule;
 using eZet.EveLib.EveXmlModule.Models;
 using eZet.EveLib.EveXmlModule.Models.Character;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace eZet.EveLib.Test {
-    [TestClass]
     public class CorporationKey_Beta {
         private const int SisiKeyId = 1467544;
 
@@ -19,7 +18,7 @@ namespace eZet.EveLib.Test {
             _sisiKey.Corporation.BaseUri = "https://api.testeveonline.com";
         }
 
-        [TestMethod]
+        [Fact]
         public async Task GetBlueprints() {
             EveXmlResponse<BlueprintList> result = await _sisiKey.Corporation.GetBlueprintsAsync();
         }

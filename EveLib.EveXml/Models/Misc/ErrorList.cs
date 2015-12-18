@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class ErrorList.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class ErrorList {
         /// <summary>
@@ -32,7 +31,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
         /// <summary>
         ///     Class Error.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Error {
             /// <summary>

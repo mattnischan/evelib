@@ -22,7 +22,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class CallList.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class CallList : IXmlSerializable {
         /// <summary>
@@ -79,7 +78,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
         /// <summary>
         ///     Class Call.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Call {
             /// <summary>
@@ -121,7 +119,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
         /// <summary>
         ///     Class CallGroup.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class CallGroup {
             /// <summary>

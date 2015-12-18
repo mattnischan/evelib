@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class PlanetaryPins.
     /// </summary>
-    [Serializable]
     [XmlRoot("result")]
     public class PlanetaryPins {
         /// <summary>
@@ -32,7 +31,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class PlanetaryPin.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class PlanetaryPin {
             /// <summary>

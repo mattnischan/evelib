@@ -23,7 +23,9 @@ namespace eZet.EveLib.EveMarketDataModule.Models {
     ///     Class EmdRowCollection.
     /// </summary>
     /// <typeparam name="T"></typeparam>
+#if NET451
     [Serializable]
+#endif
     [XmlRoot("rowset")]
     public class EmdRowCollection<T> : Collection<T>, IXmlSerializable {
         /// <summary>

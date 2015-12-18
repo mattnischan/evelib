@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class NotificationList.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class NotificationList {
         /// <summary>
@@ -33,7 +32,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class Notification.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Notification {
             /// <summary>

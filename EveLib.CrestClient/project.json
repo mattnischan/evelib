@@ -3,10 +3,10 @@
     "EveLib.EveCrest": ""
   },
   "frameworks": {
-    "net45": { },
-    "dnxcore5": {
+    "net451": { },
+    "dotnet5.4": {
       "dependencies": {
-        "System.Runtime": "4.0.0-*"
+        "System.Runtime": "4.0.21-*" 
       }
     }
   }

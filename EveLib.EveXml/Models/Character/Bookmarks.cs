@@ -22,7 +22,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class Bookmarks.
     /// </summary>
-    [Serializable]
     [XmlRoot("result")]
     public class Bookmarks {
         /// <summary>
@@ -35,7 +34,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class Folder.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Folder : IXmlSerializable {
             /// <summary>
@@ -106,7 +104,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
             /// <summary>
             ///     Class Bookmark.
             /// </summary>
-            [Serializable]
             [XmlRoot("row")]
             public class Bookmark {
                 /// <summary>

@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class Facilities.
     /// </summary>
-    [Serializable]
     [XmlRoot("result")]
     public class Facilities {
         /// <summary>
@@ -32,7 +31,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
         /// <summary>
         ///     Class Facility.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Facility {
             /// <summary>

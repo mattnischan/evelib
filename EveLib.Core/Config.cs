@@ -1,8 +1,13 @@
 ﻿using System;
+#if NET451
 using System.Configuration;
-using System.Globalization;
+#endif
 using System.IO;
 using eZet.EveLib.Core.Cache;
+#if DOTNET5_4
+using Microsoft.Extensions.Configuration;
+using System.Reflection;
+#endif
 
 namespace eZet.EveLib.Core {
     /// <summary>
@@ -13,9 +18,7 @@ namespace eZet.EveLib.Core {
         /// <summary>
         ///     relCachePath to ApplicationData folder.
         /// </summary>
-        public static readonly string AppData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                                                Separator;
-
+        public static string AppData { get; private set; }
 
         /// <summary>
         /// Gets or sets the image path.
@@ -37,16 +40,56 @@ namespace eZet.EveLib.Core {
         /// <summary>
         ///     UserAgent used for HTTP requests
         /// </summary>
-        public static readonly string UserAgent = ConfigurationManager.AppSettings["eveLib.UserAgent"];
+        public static string UserAgent { get; private set; }
 
-        static Config() {
-            if (String.IsNullOrEmpty(UserAgent))
-                UserAgent = "EveLib";
-            string appName = ConfigurationManager.AppSettings["eveLib.AppData"];
-            AppData += !string.IsNullOrEmpty(appName) ? appName : "EveLib";
-            ImagePath = AppData + Separator + "Images";
-            CachePath = AppData + Separator + "Cache";
-            CacheFactory = module => new EveLibFileCache(CachePath + Separator + module, "register");
+        /// <summary>
+        ///     The application name used for storing cache data.
+        /// </summary>
+        public static string ApplicationName { get; private set; }
+
+        static Config()
+        {
+            SetConfig();
+        }
+
+#if DOTNET5_4
+        private static void SetConfig()
+        {
+            //For DNX, use the current application folder as the base path
+            var baseLocation = Path.GetDirectoryName(typeof(Config).GetTypeInfo().Assembly.Location);
+
+            try
+            {
+                var builder = new ConfigurationBuilder();
+                builder.AddJsonFile("config.json");
+                var config = builder.Build();
+
+                BuildConfigValues(baseLocation, config["eveLib:appName"], config["eveLib:userAgent"]);
+            }
+            catch (FileNotFoundException) { }
+        }
+#endif
+
+#if NET451
+        private static void SetConfig()
+        {
+            var baseLocation = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            var appName = ConfigurationManager.AppSettings["eveLib.AppData"];
+            var userAgent = ConfigurationManager.AppSettings["eveLib.UserAgent"];
+
+            BuildConfigValues(baseLocation, appName, userAgent);
+        }
+#endif
+
+        private static void BuildConfigValues(string baseLocation, string appName, string userAgent)
+        {
+            appName = String.IsNullOrEmpty(appName) ? "EveLib" : appName;
+            UserAgent = String.IsNullOrEmpty(userAgent) ? "EveLib" : appName;
+
+            AppData = Path.Combine(baseLocation, appName);
+            ImagePath = Path.Combine(AppData, "Images");
+            CachePath = Path.Combine(AppData, "Cache");
+            CacheFactory = module => new EveLibFileCache(Path.Combine(CachePath, module), "register");
         }
     }
 }

@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class AssetList.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class AssetList {
         /// <summary>
@@ -59,7 +58,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class Item.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Item {
             /// <summary>

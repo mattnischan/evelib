@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Map {
     /// <summary>
     ///     Class Sovereignty.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class Sovereignty {
         /// <summary>
@@ -33,7 +32,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Map {
         /// <summary>
         ///     Class SolarSystem.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class SolarSystem {
             /// <summary>

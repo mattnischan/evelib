@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class CharacterAffiliation.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class CharacterAffiliation {
         /// <summary>
@@ -32,7 +31,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
         /// <summary>
         ///     Class CharacterAffiliationData.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class CharacterAffiliationData {
             /// <summary>

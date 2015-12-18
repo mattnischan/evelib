@@ -5,11 +5,10 @@ using eZet.EveLib.EveXmlModule.Models;
 using eZet.EveLib.EveXmlModule.Models.Character;
 using eZet.EveLib.EveXmlModule.Models.Misc;
 using eZet.EveLib.Test.Mocks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FactionWarfareStats = eZet.EveLib.EveXmlModule.Models.Character.FactionWarfareStats;
+using Xunit;
 
 namespace eZet.EveLib.Test {
-    [TestClass]
     public class Character_StaticDeserializationTests {
         private readonly Character _character;
 
@@ -18,188 +17,188 @@ namespace eZet.EveLib.Test {
             _character.RequestHandler = new StaticXmlRequestHandler(new XmlSerializer());
         }
 
-        [TestMethod]
+        [Fact]
         public void GetCharacterInfo() {
             EveXmlResponse<CharacterInfo> xml = _character.GetCharacterInfoAsync().Result;
-            Assert.AreEqual(99999999, xml.Result.CharacterId);
+            Assert.Equal(99999999, xml.Result.CharacterId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetAccountBalance() {
             EveXmlResponse<AccountBalance> xml = _character.GetAccountBalanceAsync().Result;
-            Assert.AreEqual(4759, xml.Result.Accounts.First().AccountId);
+            Assert.Equal(4759, xml.Result.Accounts.First().AccountId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetAssetList() {
             EveXmlResponse<AssetList> xml = _character.GetAssetListAsync().Result;
-            Assert.AreEqual(150354641, xml.Result.Items.First().ItemId);
+            Assert.Equal(150354641, xml.Result.Items.First().ItemId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetCalendarEventAttendees() {
             EveXmlResponse<CalendarEventAttendees> xml = _character.GetCalendarEventAttendees(0);
-            Assert.AreEqual(123456789, xml.Result.Attendees.First().CharacterId);
+            Assert.Equal(123456789, xml.Result.Attendees.First().CharacterId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetCharacterSheet() {
             EveXmlResponse<CharacterSheet> xml = _character.GetCharacterSheet();
-            Assert.AreEqual(150337897, xml.Result.CharacterId);
+            Assert.Equal(150337897, xml.Result.CharacterId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetContactList() {
             EveXmlResponse<ContactList> xml = _character.GetContactList();
-            Assert.AreEqual(90000002, xml.Result.PersonalContacts.First().ContactId);
-            Assert.AreEqual(90000002, xml.Result.CorporationContacts.First().ContactId);
-            Assert.AreEqual(90000002, xml.Result.AllianceContacts.First().ContactId);
+            Assert.Equal(90000002, xml.Result.PersonalContacts.First().ContactId);
+            Assert.Equal(90000002, xml.Result.CorporationContacts.First().ContactId);
+            Assert.Equal(90000002, xml.Result.AllianceContacts.First().ContactId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetContactNotifications() {
             EveXmlResponse<ContactNotifications> xml = _character.GetContactNotifications();
-            Assert.AreEqual(308734131, xml.Result.Notifications.First().NotificationId);
+            Assert.Equal(308734131, xml.Result.Notifications.First().NotificationId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetContracts() {
             EveXmlResponse<ContractList> xml = _character.GetContracts();
             // TODO Get sample
         }
 
-        [TestMethod]
+        [Fact]
         public void GetContractItems() {
             EveXmlResponse<ContractItems> xml = _character.GetContractItems(0);
-            Assert.AreEqual(600515136, xml.Result.Items.First().RecordId);
+            Assert.Equal(600515136, xml.Result.Items.First().RecordId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetContractBids() {
             EveXmlResponse<ContractBids> xml = _character.GetContractBids();
-            Assert.AreEqual(123123123, xml.Result.Bids.First().BidId);
+            Assert.Equal(123123123, xml.Result.Bids.First().BidId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetFactionWarfareStats() {
             EveXmlResponse<FactionWarfareStats> xml = _character.GetFactionWarfareStats();
-            Assert.AreEqual(500001, xml.Result.FactionId);
+            Assert.Equal(500001, xml.Result.FactionId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetIndustryJobs() {
             EveXmlResponse<IndustryJobs> xml = _character.GetIndustryJobs();
-            Assert.AreEqual(23264063, xml.Result.Jobs.First().JobId);
+            Assert.Equal(23264063, xml.Result.Jobs.First().JobId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetKillLog() {
             EveXmlResponse<KillLog> xml = _character.GetKillLog();
-            Assert.AreEqual(63, xml.Result.Kills.First().KillId);
-            Assert.AreEqual(150340823, xml.Result.Kills.First().Victim.CharacterId);
-            Assert.AreEqual(1000127, xml.Result.Kills.First().Attackers.First().CorporationId);
+            Assert.Equal(63, xml.Result.Kills.First().KillId);
+            Assert.Equal(150340823, xml.Result.Kills.First().Victim.CharacterId);
+            Assert.Equal(1000127, xml.Result.Kills.First().Attackers.First().CorporationId);
         }
 
-        [TestMethod]
+        [Fact]
         public void getLocations() {
             EveXmlResponse<Locations> xml = _character.GetLocations(0);
-            Assert.AreEqual(887875612, xml.Result.Items.First().ItemId);
+            Assert.Equal(887875612, xml.Result.Items.First().ItemId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetMailBodies() {
             EveXmlResponse<MailBodies> xml = _character.GetMailBodies(0);
-            Assert.AreEqual(297023723, xml.Result.Messages.First().MessageId);
+            Assert.Equal(297023723, xml.Result.Messages.First().MessageId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetMailingLists() {
             EveXmlResponse<MailingLists> xml = _character.GetMailingLists();
-            Assert.AreEqual(128250439, xml.Result.Lists.First().ListId);
+            Assert.Equal(128250439, xml.Result.Lists.First().ListId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetMailMessages() {
             EveXmlResponse<MailMessages> xml = _character.GetMailMessages();
-            Assert.AreEqual(290285276, xml.Result.Messages.First().MessageId);
+            Assert.Equal(290285276, xml.Result.Messages.First().MessageId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetMarketOrders() {
             EveXmlResponse<MarketOrders> xml = _character.GetMarketOrders();
-            Assert.AreEqual(5630641, xml.Result.Orders.First().OrderId);
+            Assert.Equal(5630641, xml.Result.Orders.First().OrderId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetMedals() {
             EveXmlResponse<MedalList> xml = _character.GetMedals();
-            Assert.AreEqual(95079, xml.Result.Medals.First().MedalId);
+            Assert.Equal(95079, xml.Result.Medals.First().MedalId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetNotifications() {
             EveXmlResponse<NotificationList> xml = _character.GetNotifications();
-            Assert.AreEqual(304084087, xml.Result.Notifications.First().NotificationId);
+            Assert.Equal(304084087, xml.Result.Notifications.First().NotificationId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetNotificationTexts() {
             EveXmlResponse<NotificationTexts> xml = _character.GetNotificationTexts(0);
-            Assert.AreEqual(374044083, xml.Result.Notifications.First().NotificationId);
+            Assert.Equal(374044083, xml.Result.Notifications.First().NotificationId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetResearch() {
             EveXmlResponse<Research> xml = _character.GetResearch();
-            Assert.AreEqual(3011113, xml.Result.Entries.First().AgentId);
+            Assert.Equal(3011113, xml.Result.Entries.First().AgentId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetSkillQueue() {
             EveXmlResponse<SkillQueue> xml = _character.GetSkillQueue();
-            Assert.AreEqual(11441, xml.Result.Queue.First().TypeId);
+            Assert.Equal(11441, xml.Result.Queue.First().TypeId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetSkillTraining() {
             EveXmlResponse<SkillTraining> xml = _character.GetSkillTraining();
-            Assert.AreEqual(3305, xml.Result.TypeId);
+            Assert.Equal(3305, xml.Result.TypeId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetStandings() {
             EveXmlResponse<StandingsList> xml = _character.GetStandings();
-            Assert.AreEqual(3009841, xml.Result.CharacterStandings.Agents.First().FromId);
+            Assert.Equal(3009841, xml.Result.CharacterStandings.Agents.First().FromId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetUpcomingCalendarEvents() {
             EveXmlResponse<UpcomingCalendarEvents> xml = _character.GetUpcomingCalendarEvents();
-            Assert.AreEqual(93264, xml.Result.Events.First().EventId);
+            Assert.Equal(93264, xml.Result.Events.First().EventId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetWalletJournal() {
             EveXmlResponse<WalletJournal> xml = _character.GetWalletJournal();
-            Assert.AreEqual(150337897, xml.Result.Journal.First().OwnerId);
+            Assert.Equal(150337897, xml.Result.Journal.First().OwnerId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetWalletTransactions() {
             EveXmlResponse<WalletTransactions> xml = _character.GetWalletTransactions();
-            Assert.AreEqual(1309776438, xml.Result.Transactions.First().TransactionId);
+            Assert.Equal(1309776438, xml.Result.Transactions.First().TransactionId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetChatChannels_ValidRequest_Hasresult() {
             var res = _character.GetChatChannels();
-            Assert.AreEqual(92168909, res.Result.Channels.First().Operators.First().AccessorId);
+            Assert.Equal(92168909, res.Result.Channels.First().Operators.First().AccessorId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetBookmarks_ValidRequest_Hasresult() {
             var res = _character.GetBookmarks();
-            Assert.AreEqual(0, res.Result.Folders.First().FolderId);
+            Assert.Equal(0, res.Result.Folders.First().FolderId);
         }
     }
 }

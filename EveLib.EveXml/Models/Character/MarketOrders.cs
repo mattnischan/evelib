@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class MarketOrders.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class MarketOrders {
         /// <summary>
@@ -33,7 +32,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class MarketOrder.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class MarketOrder {
             /// <summary>

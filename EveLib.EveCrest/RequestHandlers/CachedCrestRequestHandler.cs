@@ -3,7 +3,6 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
-using System.Net.Cache;
 using System.Threading;
 using System.Threading.Tasks;
 using eZet.EveLib.Core;
@@ -15,6 +14,8 @@ using eZet.EveLib.EveCrestModule.Exceptions;
 using eZet.EveLib.EveCrestModule.Models.Resources;
 using eZet.EveLib.EveCrestModule.Models.Shared;
 using eZet.EveLib.EveCrestModule.RequestHandlers.eZet.EveLib.Core.RequestHandlers;
+using System.Net.Http;
+using System.Linq;
 
 namespace eZet.EveLib.EveCrestModule.RequestHandlers {
     /// <summary>
@@ -71,7 +72,7 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
             _authedPool = new Semaphore(AuthedMaxConcurrentRequests, AuthedMaxConcurrentRequests);
             UserAgent = Config.UserAgent;
             Charset = DefaultCharset;
-            Cache = new EveLibFileCache(Config.AppData + Config.Separator + "EveCrestCache", "register");
+            Cache = new EveLibFileCache(Path.Combine(Config.AppData, "EveCrestCache"), "register");
             CacheLevel = CacheLevel.Default;
         }
 
@@ -148,97 +149,168 @@ namespace eZet.EveLib.EveCrestModule.RequestHandlers {
         ///     or
         /// </exception>
         public async Task<T> RequestAsync<T>(Uri uri, string accessToken) where T : class, ICrestResource<T> {
-            string data = null;
-            if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.CacheOnly)
-                data = await Cache.LoadAsync(uri).ConfigureAwait(false);
-            var cached = data != null;
-            T result;
-            if (cached) {
-                result = Serializer.Deserialize<T>(data);
-                result.IsFromCache = true;
-                return result;
+
+            var cacheRequest = await RequestFromCacheAsync<T>(uri);
+            if(cacheRequest.IsCached)
+            {
+                return cacheRequest.Value;
             }
-            if (CacheLevel == CacheLevel.CacheOnly) return default(T);
-            // set up request
-            var mode = (accessToken == null) ? CrestMode.Public : CrestMode.Authenticated;
-            var request = HttpRequestHelper.CreateRequest(uri);
-            request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
-            request.Accept = ContentTypes.Get<T>(ThrowOnMissingContentType) + ";";
-            request.CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.Default);
-            if (!string.IsNullOrEmpty(Charset)) request.Accept = request.Accept + " " + Charset;
-            if (!string.IsNullOrEmpty(XRequestedWith)) request.Headers.Add("X-Requested-With", XRequestedWith);
-            if (!string.IsNullOrEmpty(UserAgent)) request.UserAgent = UserAgent;
-            if (mode == CrestMode.Authenticated) {
-                request.Headers.Add(HttpRequestHeader.Authorization, TokenType + " " + accessToken);
+
+            var crestAccessMode = (accessToken == null) ? CrestMode.Public : CrestMode.Authenticated;
+            var client = GetClient<T>(crestAccessMode, accessToken);
+
+            _trace.TraceEvent(TraceEventType.Error, 0, "Initiating Request: " + uri);
+            var response = await client.GetAsync(uri).ConfigureAwait(false);
+
+            try
+            {
+                return await HandleResponse<T>(uri, response);
+            }
+            catch (HttpRequestException e)
+            {
+                _trace.TraceEvent(TraceEventType.Error, 0, "CREST Request Failed.");
+                var data = response.Content.ReadAsStringAsync().Result;
+
+                if (response.StatusCode == HttpStatusCode.InternalServerError || response.StatusCode == HttpStatusCode.BadGateway)
+                {
+                    throw new EveCrestException(data, new WebException(e.Message));
+                }
+
+                var error = Serializer.Deserialize<CrestError>(data);
+                _trace.TraceEvent(TraceEventType.Verbose, 0, "Message: {0}, Key: {1}",
+                    "Exception Type: {2}, Ref ID: {3}", error.Message, error.Key, error.ExceptionType,
+                    error.RefId);
+                throw new EveCrestException(error.Message, new WebException(e.Message), error.Key, error.ExceptionType, error.RefId);
+            }
+            finally
+            {
+                //Release semaphores
+                if (crestAccessMode == CrestMode.Authenticated)
+                {
+                    _authedPool.Release();
+                }
+                else
+                {
+                    _publicPool.Release();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Handles the response and gets the underlying data from the CREST endpoint.
+        /// </summary>
+        /// <typeparam name="T">The type of object to deserialize to.</typeparam>
+        /// <param name="uri">The Uri of the endpoint that was requested.</param>
+        /// <param name="response">The response from the API.</param>
+        /// <returns>A deserialized response object.</returns>
+        private async Task<T> HandleResponse<T>(Uri uri, HttpResponseMessage response) where T : class, ICrestResource<T>
+        {
+            response.EnsureSuccessStatusCode();
+            if (response.Headers.Contains("X-Deprecated"))
+            {
+                _trace.TraceEvent(TraceEventType.Warning, 0,
+                    "This CREST resource is deprecated. Please update to the newest EveLib version or notify the developers.");
+                if (ThrowOnDeprecated)
+                {
+                    throw new DeprecatedResourceException("The CREST resource is deprecated.", null);
+                }
+            }
+
+            var data = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.Refresh)
+            {
+                var expirationTime = GetCacheExpirationTime(response.Headers.GetValues("Cache-Control").FirstOrDefault());
+                await Cache.StoreAsync(uri, expirationTime, data).ConfigureAwait(false);
+            }
+
+            var result = Serializer.Deserialize<T>(data);
+            return result;
+        }
+
+        /// <summary>
+        /// Gets a HTTP client from the client pool.
+        /// </summary>
+        /// <typeparam name="T">The type of request content that the client will recieve.</typeparam>
+        /// <param name="authenticationMode">The authentication mode for this client's requests.</param>
+        /// <param name="accessToken">The authentication access token, if any.</param>
+        /// <returns>A new HTTP client.</returns>
+        private HttpClient GetClient<T>(CrestMode authenticationMode, string accessToken) where T : class, ICrestResource<T>
+        {
+            var httpClientHandler = new HttpClientHandler
+            {
+                AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip,
+            };
+
+            var client = new HttpClient(httpClientHandler);
+            var acceptHeader = String.IsNullOrEmpty(Charset) ? ContentTypes.Get<T>(ThrowOnMissingContentType)
+                : String.Format("{0} {1}", ContentTypes.Get<T>(ThrowOnMissingContentType), Charset);
+
+            client.DefaultRequestHeaders.Add("Accept", acceptHeader);
+
+            if(!String.IsNullOrEmpty(XRequestedWith))
+            {
+                client.DefaultRequestHeaders.Add("X-Requested-With", XRequestedWith);
+            }
+
+            if(!String.IsNullOrEmpty(UserAgent))
+            {
+                client.DefaultRequestHeaders.Add("User-Agent", UserAgent);
+            }
+
+            if (authenticationMode == CrestMode.Authenticated)
+            {
+                client.DefaultRequestHeaders.Add("Authorization", String.Format("{0} {1}", TokenType, accessToken));
                 _authedPool.WaitOne();
             }
             else {
                 _publicPool.WaitOne();
             }
 
-            _trace.TraceEvent(TraceEventType.Error, 0, "Initiating Request: " + uri);
-            WebHeaderCollection header;
-            try {
-                var response = await HttpRequestHelper.GetResponseAsync(request).ConfigureAwait(false);
-                header = response.Headers;
-                var deprecated = response.GetResponseHeader("X-Deprecated");
-
-                if (!string.IsNullOrEmpty(deprecated)) {
-                    _trace.TraceEvent(TraceEventType.Warning, 0,
-                        "This CREST resource is deprecated. Please update to the newest EveLib version or notify the developers.");
-                    if (ThrowOnDeprecated) {
-                        throw new DeprecatedResourceException("The CREST resource is deprecated.", response);
-                    }
-                }
-                data = await HttpRequestHelper.GetResponseContentAsync(response).ConfigureAwait(false);
-                // release semaphores
-                if (mode == CrestMode.Authenticated) _authedPool.Release();
-                else _publicPool.Release();
-            }
-            catch (WebException e) {
-                // release semaphores
-                if (mode == CrestMode.Authenticated) _authedPool.Release();
-                else _publicPool.Release();
-
-                _trace.TraceEvent(TraceEventType.Error, 0, "CREST Request Failed.");
-                if (e.Response == null) {
-                    throw new EveCrestException(e.Message, e);
-                }
-                var response = (HttpWebResponse) e.Response;
-
-                var responseStream = response.GetResponseStream();
-                if (responseStream == null) throw new EveCrestException("Undefined error", e);
-                using (var reader = new StreamReader(responseStream)) {
-                    data = reader.ReadToEnd();
-                    if (response.StatusCode == HttpStatusCode.InternalServerError ||
-                        response.StatusCode == HttpStatusCode.BadGateway) throw new EveCrestException(data, e);
-                    var error = Serializer.Deserialize<CrestError>(data);
-                    _trace.TraceEvent(TraceEventType.Verbose, 0, "Message: {0}, Key: {1}",
-                        "Exception Type: {2}, Ref ID: {3}", error.Message, error.Key, error.ExceptionType,
-                        error.RefId);
-                    throw new EveCrestException(error.Message, e, error.Key, error.ExceptionType, error.RefId);
-                }
-            }
-            if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.Refresh)
-                await Cache.StoreAsync(uri, getCacheExpirationTime(header), data).ConfigureAwait(false);
-            result = Serializer.Deserialize<T>(data);
-            result.ResponseHeaders = header;
-            return result;
+            return client;
         }
 
+        /// <summary>
+        /// Gets the cache expiration time from a Cache-Control header value.
+        /// </summary>
+        /// <param name="headerValue">The Cache-Control header string value.</param>
+        /// <returns>A DateTime representing the cache expiration.</returns>
+        private static DateTime GetCacheExpirationTime(string headerValue)
+        {
+            if (headerValue == null)
+            {
+                return DateTime.UtcNow;
+            }
 
-        private static DateTime getCacheExpirationTime(NameValueCollection header) {
-            var cache = header.Get("Cache-Control");
-            if (cache == null) return DateTime.UtcNow;
-            var str = cache.Substring(cache.IndexOf('=') + 1);
+            var str = headerValue.Substring(headerValue.IndexOf('=') + 1);
             var sec = int.Parse(str);
             return DateTime.UtcNow.AddSeconds(sec);
         }
 
-        ///// <summary>
-        ///// Gets or sets a value indicating whether [enable cache].
-        ///// </summary>
-        ///// <value><c>true</c> if [enable cache]; otherwise, <c>false</c>.</value>
-        //public bool EnableCache { get; set; }
+        /// <summary>
+        /// Requests a resource from the CREST cache.
+        /// </summary>
+        /// <typeparam name="T">The type of resource to request.</typeparam>
+        /// <param name="uri">The Uri of the resource.</param>
+        /// <returns>A CacheRequestResult indicating if the resource was cached and if so, the value of that resource.</returns>
+        private async Task<CacheRequestResult<T>> RequestFromCacheAsync<T>(Uri uri) where T : class, ICrestResource<T>
+        {
+            string cachedResponse = null;
+            if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.CacheOnly)
+            {
+                cachedResponse = await Cache.LoadAsync(uri).ConfigureAwait(false);
+            }
+
+            if (cachedResponse != null)
+            {
+                return new CacheRequestResult<T> { Value = Serializer.Deserialize<T>(cachedResponse), IsCached = true };
+            }
+
+            if (CacheLevel == CacheLevel.CacheOnly)
+            {
+                return new CacheRequestResult<T> { Value = default(T), IsCached = true };
+            }
+
+            return new CacheRequestResult<T> { Value = default(T), IsCached = false };
+        }
     }
 }

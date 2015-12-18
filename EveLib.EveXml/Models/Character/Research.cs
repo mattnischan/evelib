@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class Research.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class Research {
         /// <summary>
@@ -33,7 +32,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class ResearchEntry.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class ResearchEntry {
             /// <summary>

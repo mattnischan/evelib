@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class SkillTraining.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class SkillTraining {
         // TODO Convert zone

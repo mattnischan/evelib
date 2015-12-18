@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using eZet.EveLib.Core;
 using eZet.EveLib.Core.RequestHandlers;
+using System.IO;
 
 namespace eZet.EveLib.EveXmlModule {
     /// <summary>
@@ -333,14 +334,14 @@ namespace eZet.EveLib.EveXmlModule {
 
         private Task<byte[]> requestImageDataAsync(string relPath, long id, int size, string extension) {
             var fileName = id + "_" + size + extension;
-            var uri = new Uri(BaseUri + relPath + Config.Separator + fileName);
+            var uri = new Uri(String.Format("{0}{1}/{2}", BaseUri, relPath, fileName));
             return RequestHandler.RequestImageDataAsync(uri);
         }
 
         private async Task<string> requestImageAsync(string relUri, long id, int size, string extension, string path) {
             var fileName = id + "_" + size + extension;
-            var uri = new Uri(BaseUri + relUri + Config.Separator + fileName);
-            var file = path + Config.Separator + fileName;
+            var uri = new Uri(String.Format("{0}{1}/{2}", BaseUri, relUri, fileName));
+            var file = Path.Combine(path, fileName);
             await RequestHandler.RequestImageAsync(uri, file).ConfigureAwait(false);
             return file;
         }

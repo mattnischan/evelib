@@ -1,9 +1,10 @@
 {
+  "version": "3.1.0-beta-*",
   "dependencies": {
     "Newtonsoft.Json": "7.0.1"
   },
   "frameworks": {
-    "net45": {
+    "net451": {
       "frameworkAssemblies": {
         "System.Core": "",
         "System.Runtime.Serialization": "",
@@ -12,21 +13,26 @@
         "System.Net.Http": ""
       }
     },
-    "dnxcore5": {
+    "dotnet5.4": {
       "dependencies": {
-        "System.Collections": "4.0.10",
-        "System.Linq": "4.0.0",
-        "System.Threading.Tasks": "4.0.10",
-        "System.Security.Cryptography.Algorithms": "4.0.0-beta-23225",
-        "System.Diagnostics.TraceSource": "4.0.0-beta-23225",
-        "System.Dynamic.Runtime": "4.0.10",
-        "System.Runtime.Serialization.Primitives": "4.0.10",
-        "System.Diagnostics.Tools": "4.0.0",
-        "System.Net.Requests": "4.0.10",
-        "System.Diagnostics.Contracts": "4.0.0",
-        "System.Xml.XmlDocument": "4.0.0",
-        "Microsoft.Framework.ConfigurationModel.Xml": "1.0.0-beta4",
-        "System.IO": "4.0.10"
+        "System.Collections": "4.0.11-*",
+        "System.Diagnostics.Contracts": "4.0.1-*",
+        "System.Diagnostics.Tools": "4.0.1-*",
+        "System.Diagnostics.TraceSource": "4.0.0-*",
+        "System.Dynamic.Runtime": "4.0.11-*",
+        "System.IO": "4.0.11-*",
+        "System.Linq": "4.0.1-*",
+        "System.Net.Requests": "4.0.11-*",
+        "System.Net.Http": "4.0.0",
+        "System.Runtime.Serialization.Primitives": "4.1.0-*",
+        "System.Xml.XmlSerializer": "4.0.11-*",
+        "System.Security.Cryptography.Algorithms": "4.0.0-*",
+        "System.Threading.Tasks": "4.0.11-*",
+        "System.Xml.XmlDocument": "4.0.1-*",
+        "System.Runtime": "4.0.21-*",
+        "System.Reflection": "4.1.0-*",
+        "Microsoft.Extensions.Configuration": "1.0.0-*",
+        "Microsoft.Extensions.Configuration.Json": "1.0.0-*"
       }
     }
   }

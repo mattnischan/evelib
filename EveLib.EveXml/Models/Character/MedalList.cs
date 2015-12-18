@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class MedalList.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class MedalList {
         /// <summary>
@@ -33,7 +32,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class Medal.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Medal {
             /// <summary>

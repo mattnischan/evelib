@@ -22,7 +22,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class MemberSecurity.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class MemberSecurity {
         /// <summary>
@@ -35,7 +34,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
         /// <summary>
         ///     Class Member.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Member : IXmlSerializable {
             /// <summary>
@@ -163,7 +161,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
         /// <summary>
         ///     Class Role.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Role {
             /// <summary>
@@ -184,7 +181,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
         /// <summary>
         ///     Class Title.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Title {
             /// <summary>

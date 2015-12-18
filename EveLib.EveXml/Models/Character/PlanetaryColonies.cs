@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class PlanetaryColonies.
     /// </summary>
-    [Serializable]
     [XmlRoot("result")]
     public class PlanetaryColonies {
         /// <summary>
@@ -32,7 +31,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class PlanetaryColony.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class PlanetaryColony {
             /// <summary>

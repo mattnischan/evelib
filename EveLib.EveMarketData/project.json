@@ -1,6 +1,15 @@
-{ 
-	"frameworks": {
-		"net45": { },
-		"dnxcore5": { }
-	}
+{
+  "dependencies": {
+    "EveLib.Core": "",
+    "Newtonsoft.Json": "7.0.1"
+  },
+  "frameworks": {
+    "net451": {
+      "frameworkAssemblies": {
+        "System.Xml": "",
+        "System.Runtime.Serialization": ""
+      }
+    },
+    "dotnet5.4": { }
+  }
 }

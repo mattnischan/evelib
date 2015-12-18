@@ -1,6 +1,9 @@
-{ 
-	"frameworks": {
-		"net45": { },
-		"dnxcore5": { }
-	}
+{
+  "dependencies": {
+    "EveLib.Core": ""
+  },
+  "frameworks": {
+    "net451": { },
+    "dotnet5.4": { }
+  }
 }

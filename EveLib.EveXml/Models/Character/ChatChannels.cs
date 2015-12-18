@@ -22,7 +22,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class ChatChannels.
     /// </summary>
-    [Serializable]
     [XmlRoot("result")]
     public class ChatChannels {
         /// <summary>
@@ -36,7 +35,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class Channel.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Channel : IXmlSerializable {
             /// <summary>
@@ -157,7 +155,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class Accessor.
     /// </summary>
-    [Serializable]
     [XmlRoot("row")]
     public class Accessor {
         /// <summary>

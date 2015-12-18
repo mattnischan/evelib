@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class MemberTracking.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class MemberTracking {
         /// <summary>
@@ -33,7 +32,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
         /// <summary>
         ///     Class Member.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Member {
             /// <summary>

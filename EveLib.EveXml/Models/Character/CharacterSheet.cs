@@ -23,7 +23,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Represents a Character Sheet
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class CharacterSheet : IXmlSerializable {
         /// <summary>
@@ -410,7 +409,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class Implant.
     /// </summary>
-    [Serializable]
     [XmlRoot("row")]
     public class Implant {
         /// <summary>
@@ -431,7 +429,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class JumpCloneImplant.
     /// </summary>
-    [Serializable]
     [XmlRoot("row")]
     public class JumpCloneImplant {
         /// <summary>
@@ -459,7 +456,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class JumpClone.
     /// </summary>
-    [Serializable]
     [XmlRoot("row")]
     public class JumpClone {
         /// <summary>
@@ -495,7 +491,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     The total attribute values
     /// </summary>
-    [Serializable]
     [DebuggerStepThrough]
     [XmlType(AnonymousType = true)]
     [XmlRoot("attributes")]
@@ -540,7 +535,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class Skill.
     /// </summary>
-    [Serializable]
     [XmlRoot("row")]
     public class Skill {
         /// <summary>
@@ -575,7 +569,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class Certificate.
     /// </summary>
-    [Serializable]
     [XmlRoot("row")]
     public class Certificate {
         /// <summary>
@@ -589,7 +582,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class Role.
     /// </summary>
-    [Serializable]
     [XmlRoot("row")]
     public class Role {
         /// <summary>
@@ -610,7 +602,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class Title.
     /// </summary>
-    [Serializable]
     [XmlRoot("row")]
     public class Title {
         /// <summary>

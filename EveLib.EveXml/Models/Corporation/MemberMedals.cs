@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class MemberMedals.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class MemberMedals {
         /// <summary>
@@ -34,7 +33,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
         /// <summary>
         ///     Class Medal.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Medal {
             /// <summary>

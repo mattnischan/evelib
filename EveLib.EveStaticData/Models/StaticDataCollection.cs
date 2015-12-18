@@ -21,7 +21,9 @@ namespace eZet.EveLib.StaticDataModule.Models {
     ///     Class StaticDataCollection.
     /// </summary>
     /// <typeparam name="T"></typeparam>
+#if NET451
     [Serializable]
+#endif
     [DataContract]
     public class StaticDataCollection<T> {
         /// <summary>

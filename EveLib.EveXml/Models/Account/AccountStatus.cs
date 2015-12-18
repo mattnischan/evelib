@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Account {
     /// <summary>
     ///     Account Status
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class AccountStatus {
         /// <summary>
@@ -83,7 +82,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Account {
     /// <summary>
     ///     Multi Character Training
     /// </summary>
-    [Serializable]
     [XmlRoot("row", IsNullable = false)]
     public class MultiCharacterTraining {
         /// <summary>

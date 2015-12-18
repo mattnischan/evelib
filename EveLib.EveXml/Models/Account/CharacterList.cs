@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Account {
     /// <summary>
     ///     Class CharacterList.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class CharacterList {
         /// <summary>
@@ -30,7 +29,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Account {
         /// <summary>
         ///     Class CharacterInfo.
         /// </summary>
-        [Serializable]
         [XmlRoot("row", IsNullable = false)]
         public class CharacterInfo {
             /// <summary>

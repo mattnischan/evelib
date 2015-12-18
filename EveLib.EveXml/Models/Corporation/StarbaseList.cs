@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class StarbaseList.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class StarbaseList {
         /// <summary>
@@ -34,7 +33,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
         /// <summary>
         ///     Class Starbase.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Starbase {
             /// <summary>

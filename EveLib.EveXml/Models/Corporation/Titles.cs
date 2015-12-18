@@ -22,7 +22,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class TitleList.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class TitleList {
         /// <summary>
@@ -35,7 +34,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
         /// <summary>
         ///     Class Role.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Role {
             /// <summary>
@@ -63,7 +61,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
         /// <summary>
         ///     Class Title.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Title : IXmlSerializable {
             /// <summary>

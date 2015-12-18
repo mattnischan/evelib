@@ -5,13 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using eZet.EveLib.Core.RequestHandlers;
 using eZet.EveLib.EveCrestModule;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace eZet.EveLib.Test {
 
-
-
-    [TestClass]
     public class EveCrest_Singularity_Tests {
 
         private string accessToken =
@@ -35,17 +32,17 @@ namespace eZet.EveLib.Test {
             Crest.RequestHandler.CacheLevel = CacheLevel.BypassCache;
         }
 
-        [TestMethod]
+        [Fact]
         public void RefreshToken() {
             var result = Crest.RefreshAccessToken();
         }
 
-        [TestMethod]
+        [Fact]
         public void GetRoot() {
             var root = Crest.GetRoot();
         }
 
-        [TestMethod]
+        [Fact]
         public async Task GetFittings() {
             var fittings =
                 await (await (await (await Crest.GetRootAsync()).QueryAsync(r => r.Decode)).QueryAsync(r => r.Character)).QueryAsync(r => r.Fittings);

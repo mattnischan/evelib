@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class CertificateTree.
     /// </summary>
-    [Serializable]
     [XmlRoot("result")]
     public class CertificateTree {
         /// <summary>
@@ -32,7 +31,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
         /// <summary>
         ///     Class Certificate.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Certificate {
             /// <summary>
@@ -74,7 +72,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
         /// <summary>
         ///     Class CertificateCategory.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class CertificateCategory {
             /// <summary>
@@ -102,7 +99,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
         /// <summary>
         ///     Class CertificateClass.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class CertificateClass {
             /// <summary>
@@ -130,7 +126,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
         /// <summary>
         ///     Class Skill.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Skill {
             /// <summary>

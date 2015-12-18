@@ -22,7 +22,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class MemberSecurityLog.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class MemberSecurityLog {
         /// <summary>
@@ -35,7 +34,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
         /// <summary>
         ///     Class LogEntry.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class LogEntry : IXmlSerializable {
             /// <summary>

@@ -22,7 +22,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class StandingsList.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class StandingsList {
         /// <summary>
@@ -36,7 +35,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class StandingEntry.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class StandingEntry {
             /// <summary>

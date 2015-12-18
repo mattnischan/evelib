@@ -3,17 +3,17 @@
     "EveLib.Core": ""
   },
   "frameworks": {
-    "net45": {
+    "net451": {
       "frameworkAssemblies": {
         "System.Xml.Serialization": "",
         "System.Xml": "",
         "System.Net.Http": ""
       }
     },
-    "dnxcore5": {
+    "dotnet5.4": {
       "dependencies": {
-        "System.Runtime.Serialization.Primitives": "4.0.10",
-        "System.Runtime.Serialization.Xml": "4.0.10",
+        "System.Runtime.Serialization.Primitives": "4.1.0-*",
+        "System.Xml.XmlSerializer": "4.0.11-*",
         "System.Net.Http": "4.0.0"
       }
     }

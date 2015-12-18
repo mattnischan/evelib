@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class ServerStatus.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class ServerStatus {
         /// <summary>

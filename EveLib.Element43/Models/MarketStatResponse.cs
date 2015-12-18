@@ -20,7 +20,6 @@ namespace eZet.EveLib.Element43Module.Models {
     /// <summary>
     ///     Class MarketStatResponse.
     /// </summary>
-    [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(ElementName = "e43_api", IsNullable = false)]
     public class MarketStatResponse {

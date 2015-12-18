@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Eve Online Blueprint response
     /// </summary>
-    [Serializable]
     [XmlRoot("result")]
     public class BlueprintList {
         /// <summary>
@@ -32,7 +31,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Represents a blueprint
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Blueprint {
             /// <summary>

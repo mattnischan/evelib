@@ -2,126 +2,125 @@
 using eZet.EveLib.EveXmlModule;
 using eZet.EveLib.EveXmlModule.Models;
 using eZet.EveLib.EveXmlModule.Models.Misc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using eZet.EveLib.EveXmlModule.Models.Corporation;
+using Xunit;
 
 namespace eZet.EveLib.Test {
-    [TestClass]
     public class Misc_Tests {
         private const string CharName = "CCP Garthagk";
 
         private const long CharId = 797400947;
         private readonly Eve api = new Eve();
 
-        [TestMethod]
+        [Fact]
         public void GetAllianceList_ValidRequest_HasResult() {
             EveXmlResponse<AllianceList> xml = api.GetAllianceList(true);
-            Assert.IsNotNull(xml.Result.Alliances.First());
-            Assert.IsNotNull(xml.Result.Alliances.First().Corporations);
+            Assert.NotNull(xml.Result.Alliances.First());
+            Assert.NotNull(xml.Result.Alliances.First().Corporations);
         }
 
         /// <summary>
         ///     Currently disabled by CCP
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void GetCertificateTree_ValidRequest_HasResult() {
             EveXmlResponse<CertificateTree> xml = api.GetCertificateTree();
-            Assert.IsNotNull(xml.Result);
+            Assert.NotNull(xml.Result);
         }
 
         /// <summary>
         ///     Not yet implemented by CCP
         /// </summary>
-        [TestMethod]
+        [Fact]
         public void GetCharacterAffiliation_ValidRequest_HasResult() {
             EveXmlResponse<CharacterAffiliation> xml = api.GetCharacterAffiliation(CharId);
-            Assert.IsNotNull(xml.Result.Characters.First());
+            Assert.NotNull(xml.Result.Characters.First());
         }
 
-        [TestMethod]
+        [Fact]
         public void GetCharacterId_ValidName_IdIsEqual() {
             EveXmlResponse<CharacterNameId> xml = api.GetCharacterId(CharName);
-            Assert.AreEqual(CharId, xml.Result.Characters.First().CharacterId);
+            Assert.Equal(CharId, xml.Result.Characters.First().CharacterId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetCharacterInfo_ValidId_IdIsEqual() {
             EveXmlResponse<CharacterInfo> xml = api.GetCharacterInfo(CharId);
-            Assert.AreEqual(CharId, xml.Result.CharacterId);
+            Assert.Equal(CharId, xml.Result.CharacterId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetCharacterName_ValidId_NameIsEqual() {
             EveXmlResponse<CharacterNameId> xml = api.GetCharacterName(CharId);
-            Assert.AreEqual(CharName, xml.Result.Characters.First().CharacterName);
+            Assert.Equal(CharName, xml.Result.Characters.First().CharacterName);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetConquerableStations_ValidRequest_HasResult() {
             EveXmlResponse<ConquerableStations> xml = api.GetConquerableStations();
-            Assert.IsNotNull(xml.Result.Stations.First().StationName);
+            Assert.NotNull(xml.Result.Stations.First().StationName);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetErrorList_ValidRequest_HasResult() {
             EveXmlResponse<ErrorList> xml = api.GetErrorList();
-            Assert.IsNotNull(xml.Result.Errors.First().ErrorText);
+            Assert.NotNull(xml.Result.Errors.First().ErrorText);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetFactionWarfareStats_ValidRequest_HasResult() {
             EveXmlResponse<EveXmlModule.Models.Misc.FactionWarfareStats> xml = api.GetFactionWarfareStats();
-            Assert.IsNotNull(xml.Result.Factions.First().FactionName);
+            Assert.NotNull(xml.Result.Factions.First().FactionName);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetFactionWarfareTopList_ValidRequest_HasResult() {
             EveXmlResponse<FactionWarTopStats> xml = api.GetFactionWarfareTopList();
-            Assert.IsNotNull(xml.Result.Characters.KillsYesterday.First().CharacterName);
+            Assert.NotNull(xml.Result.Characters.KillsYesterday.First().CharacterName);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetReferenceTypes_ValidRequest_HasResult() {
             EveXmlResponse<ReferenceTypes> xml = api.GetReferenceTypes();
-            Assert.IsNotNull(xml.Result.RefTypes.First().RefTypeName);
+            Assert.NotNull(xml.Result.RefTypes.First().RefTypeName);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetSkillTree_ValidRequest_HasResult() {
             EveXmlResponse<SkillTree> xml = api.GetSkillTree();
-            Assert.IsNotNull(xml.Result.Groups.First());
+            Assert.NotNull(xml.Result.Groups.First());
         }
 
-        [TestMethod]
+        [Fact]
         public void GetTypeName_ValidId_HasResult() {
             EveXmlResponse<TypeName> xml = api.GetTypeName(12345);
-            Assert.AreEqual("200mm Railgun I Blueprint", xml.Result.Types.First().TypeName);
+            Assert.Equal("200mm Railgun I Blueprint", xml.Result.Types.First().TypeName);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetServerStatus_ValidRequest_HasResult() {
             EveXmlResponse<ServerStatus> xml = api.GetServerStatus();
-            Assert.IsNotNull(xml.Result.ServerOpen);
+            Assert.NotNull(xml.Result.ServerOpen);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetCallList_ValidRequest_HasResult() {
             EveXmlResponse<CallList> xml = api.GetCallList();
-            Assert.IsNotNull(xml.Result.CallGroups.First());
-            Assert.IsNotNull(xml.Result.Calls.First());
+            Assert.NotNull(xml.Result.CallGroups.First());
+            Assert.NotNull(xml.Result.Calls.First());
         }
 
-        [TestMethod]
+        [Fact]
         public void GetOwner_ValidRequest_HasResult() {
             EveXmlResponse<OwnerCollection> xml = api.GetOwnerId(CharName);
-            Assert.IsNotNull(xml.Result.Owners.First());
-            Assert.AreEqual(CharId, xml.Result.Owners.First().OwnerId);
+            Assert.NotNull(xml.Result.Owners.First());
+            Assert.Equal(CharId, xml.Result.Owners.First().OwnerId);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetCorporationSheet_ValidRequest_HasResult() {
             EveXmlResponse<CorporationSheet> xml = api.GetCorporationSheet(109299958);
-            Assert.AreEqual("C C P", xml.Result.CorporationName);
+            Assert.Equal("C C P", xml.Result.CorporationName);
         }
 
 

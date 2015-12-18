@@ -1,9 +1,8 @@
 ﻿using eZet.EveLib.ZKillboardModule;
 using eZet.EveLib.ZKillboardModule.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace eZet.EveLib.Test {
-    [TestClass]
     public class ZKillboard_Tests {
         public ZKillboard Api = new ZKillboard();
 
@@ -14,22 +13,22 @@ namespace eZet.EveLib.Test {
             Options.WSpace = true;
         }
 
-        [TestMethod]
+        [Fact]
         public void GetKills_ValidRequest_NoErrors() {
             ZkbResponse result = Api.GetKills(Options);
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetLosses_ValidRequest_NoErrors() {
             ZkbResponse result = Api.GetLosses(Options);
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetAll_ValidRequest_NoErrors() {
             ZkbResponse result = Api.GetLosses(Options);
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
     }
 }

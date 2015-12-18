@@ -22,7 +22,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class FactionWarfareStats.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class FactionWarfareStats : IXmlSerializable {
         /// <summary>
@@ -86,7 +85,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
         /// <summary>
         ///     Class FactionWarfareEntry.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class FactionWarfareEntry {
             /// <summary>
@@ -177,7 +175,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
         /// <summary>
         ///     Class FactionWarfareTotals.
         /// </summary>
-        [Serializable]
         [XmlRoot("totals")]
         public class FactionWarfareTotals {
             /// <summary>

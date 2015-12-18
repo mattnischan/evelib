@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class FactionWarfareStats.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class FactionWarfareStats {
         /// <summary>

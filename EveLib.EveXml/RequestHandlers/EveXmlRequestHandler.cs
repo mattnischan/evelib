@@ -9,6 +9,8 @@ using eZet.EveLib.Core.Serializers;
 using eZet.EveLib.Core.Util;
 using eZet.EveLib.EveXmlModule.Exceptions;
 using eZet.EveLib.EveXmlModule.Models;
+using System.Net.Http;
+using eZet.EveLib.Core;
 
 namespace eZet.EveLib.EveXmlModule.RequestHandlers {
     /// <summary>
@@ -39,34 +41,41 @@ namespace eZet.EveLib.EveXmlModule.RequestHandlers {
         /// <typeparam name="T"></typeparam>
         /// <param name="uri"></param>
         /// <returns></returns>
-        public async Task<T> RequestAsync<T>(Uri uri) {
-            string data = null;
-            if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.CacheOnly)
-                data = await Cache.LoadAsync(uri).ConfigureAwait(false);
-            var cached = data != null;
-            if (cached) return Serializer.Deserialize<T>(data);
-            if (CacheLevel == CacheLevel.CacheOnly) return default(T);
-            try {
-                data = await HttpRequestHelper.RequestAsync(uri).ConfigureAwait(false);
+        public async Task<T> RequestAsync<T>(Uri uri)
+        {
+            var cacheResult = await RequestFromCacheAsync<T>(uri);
+            if(cacheResult.IsCached)
+            {
+                return cacheResult.Value;
             }
-            catch (WebException e) {
-                _trace.TraceEvent(TraceEventType.Error, 0, "Http Request failed");
-                var response = (HttpWebResponse) e.Response;
-                if (response == null) throw;
-                var responseStream = response.GetResponseStream();
-                if (responseStream == null) throw;
-                using (var reader = new StreamReader(responseStream)) {
-                    data = reader.ReadToEnd();
-                    var error = Serializer.Deserialize<EveXmlError>(data);
-                    _trace.TraceEvent(TraceEventType.Verbose, 0, "Error: {0}, Code: {1}", error.Error.ErrorText,
-                        error.Error.ErrorCode);
-                    throw new EveXmlException(error.Error.ErrorText, error.Error.ErrorCode, e);
+
+            var client = GetClient();
+            var response = await client.GetAsync(uri);
+
+            try
+            {
+                response.EnsureSuccessStatusCode();
+                var data = await response.Content.ReadAsStringAsync();
+
+                var xml = Serializer.Deserialize<T>(await response.Content.ReadAsStringAsync());
+                if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.Refresh)
+                {
+                    await Cache.StoreAsync(uri, GetCacheExpirationTime(xml), data).ConfigureAwait(false);
                 }
+
+                return xml;
             }
-            var xml = Serializer.Deserialize<T>(data);
-            if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.Refresh)
-                await Cache.StoreAsync(uri, getCacheExpirationTime(xml), data).ConfigureAwait(false);
-            return xml;
+            catch (HttpRequestException e)
+            {
+                _trace.TraceEvent(TraceEventType.Error, 0, "Http Request failed");
+                var data = await response.Content.ReadAsStringAsync();
+
+                var error = Serializer.Deserialize<EveXmlError>(data);
+                _trace.TraceEvent(TraceEventType.Verbose, 0, "Error: {0}, Code: {1}", error.Error.ErrorText,
+                    error.Error.ErrorCode);
+
+                throw new EveXmlException(error.Error.ErrorText, error.Error.ErrorCode, new WebException(e.Message));
+            } 
         }
 
         /// <summary>
@@ -74,9 +83,53 @@ namespace eZet.EveLib.EveXmlModule.RequestHandlers {
         /// </summary>
         /// <param name="xml"></param>
         /// <returns></returns>
-        private DateTime getCacheExpirationTime(dynamic xml) {
+        private DateTime GetCacheExpirationTime(dynamic xml) {
             //if (o.GetType().Is) throw new System.Exception("Should never occur.");
             return xml.CachedUntil;
+        }
+
+        /// <summary>
+        /// Requests a resource from the CREST cache.
+        /// </summary>
+        /// <typeparam name="T">The type of resource to request.</typeparam>
+        /// <param name="uri">The Uri of the resource.</param>
+        /// <returns>A CacheRequestResult indicating if the resource was cached and if so, the value of that resource.</returns>
+        private async Task<CacheRequestResult<T>> RequestFromCacheAsync<T>(Uri uri)
+        {
+            string cachedResponse = null;
+            if (CacheLevel == CacheLevel.Default || CacheLevel == CacheLevel.CacheOnly)
+            {
+                cachedResponse = await Cache.LoadAsync(uri).ConfigureAwait(false);
+            }
+
+            if (cachedResponse != null)
+            {
+                return new CacheRequestResult<T> { Value = Serializer.Deserialize<T>(cachedResponse), IsCached = true };
+            }
+
+            if (CacheLevel == CacheLevel.CacheOnly)
+            {
+                return new CacheRequestResult<T> { Value = default(T), IsCached = true };
+            }
+
+            return new CacheRequestResult<T> { Value = default(T), IsCached = false };
+        }
+
+        /// <summary>
+        /// Gets a HTTP client from the client pool.
+        /// </summary>
+        /// <returns>A new HTTP client.</returns>
+        private HttpClient GetClient()
+        {
+            var httpClientHandler = new HttpClientHandler
+            {
+                AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip,
+            };
+
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("User-Agent", Config.UserAgent);
+
+            return new HttpClient(httpClientHandler);
         }
     }
 }

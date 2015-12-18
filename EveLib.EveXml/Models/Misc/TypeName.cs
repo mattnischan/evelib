@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class TypeName.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class TypeName {
         /// <summary>
@@ -32,7 +31,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
         /// <summary>
         ///     Class TypeData.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class TypeData {
             /// <summary>

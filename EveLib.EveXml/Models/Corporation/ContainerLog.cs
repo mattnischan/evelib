@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class ContainerLog.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class ContainerLog {
         /// <summary>
@@ -33,7 +32,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
         /// <summary>
         ///     Class LogEntry.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class LogEntry {
             /// <summary>

@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class OwnerCollection.
     /// </summary>
-    [Serializable]
     [XmlRoot("result")]
     public class OwnerCollection {
         /// <summary>
@@ -62,7 +61,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
         /// <summary>
         ///     Class Owner.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Owner {
             /// <summary>

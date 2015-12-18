@@ -4,12 +4,12 @@
     "EveLib.EveAuth": ""
   },
   "frameworks": {
-    "net45": { },
-    "dnxcore5": {
+    "net451": { },
+    "dotnet5.4": {
       "dependencies": {
-        "System.Net.Http": "4.0.0",
-        "System.Net.Requests": "4.0.10",
-        "System.Net.Primitives": "4.0.10",
+        "System.Net.Http": "4.0.1-*",
+        "System.Net.Requests": "4.0.11-*",
+        "System.Net.Primitives": "4.0.11-*",
         "System.Diagnostics.TraceSource": "4.0.0-*"
       }
     }

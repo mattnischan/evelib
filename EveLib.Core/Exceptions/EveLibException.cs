@@ -4,7 +4,9 @@ namespace eZet.EveLib.Core.Exceptions {
     /// <summary>
     ///     Base for all EveLib Exceptions
     /// </summary>
+#if NET451
     [Serializable]
+#endif
     public class EveLibException : Exception {
         /// <summary>
         ///     Constructor

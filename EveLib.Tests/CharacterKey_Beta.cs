@@ -3,10 +3,9 @@ using System.Threading.Tasks;
 using eZet.EveLib.EveXmlModule;
 using eZet.EveLib.EveXmlModule.Models;
 using eZet.EveLib.EveXmlModule.Models.Character;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace eZet.EveLib.Test {
-    [TestClass]
     public class CharacterKey_Beta {
         private const string SisiVCode = "nNsODzp8SwufvWeMUmE0UINIMxTpNpEqqr2MOn6DmAXgQBRjKwFc7C4i5pp5uVRX";
 
@@ -20,7 +19,7 @@ namespace eZet.EveLib.Test {
             _sisiKey.Characters.First().BaseUri = "https://api.testeveonline.com";
         }
 
-        [TestMethod]
+        [Fact]
         public async Task GetBlueprints() {
             EveXmlResponse<BlueprintList> result = await _sisiKey.Characters.First().GetBlueprintsAsync();
         }

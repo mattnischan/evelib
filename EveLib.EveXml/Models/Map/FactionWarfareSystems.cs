@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Map {
     /// <summary>
     ///     Class FactionWarfareSystems.
     /// </summary>
-    [Serializable]
     [XmlRoot("result")]
     public class FactionWarfareSystems {
         /// <summary>
@@ -32,7 +31,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Map {
         /// <summary>
         ///     Class SolarSystem.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class SolarSystem {
             /// <summary>

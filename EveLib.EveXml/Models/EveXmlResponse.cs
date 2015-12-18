@@ -23,7 +23,6 @@ namespace eZet.EveLib.EveXmlModule.Models {
     ///     Class EveXmlResponse.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    [Serializable]
     [XmlRoot("eveapi", IsNullable = false)]
     public class EveXmlResponse<T> : IXmlSerializable {
         /// <summary>

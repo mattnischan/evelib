@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class WalletJournal.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class WalletJournal {
         /// <summary>
@@ -33,7 +32,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class JournalEntry.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class JournalEntry {
             /// <summary>

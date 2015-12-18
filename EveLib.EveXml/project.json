@@ -1,6 +1,18 @@
-{ 
-	"frameworks": {
-		"net45": { },
-		"dnxcore5": { }
-	}
+{
+  "dependencies": {
+    "EveLib.Core": ""
+  },
+  "frameworks": {
+    "net451": {
+      "frameworkAssemblies": {
+        "System.Xml.Linq": ""
+      }
+    },
+    "dotnet5.4": {
+      "dependencies": {
+        "System.Xml.XDocument": "4.0.11-*",
+        "Microsoft.CSharp": "4.0.1-*"
+      }
+    }
+  }
 }

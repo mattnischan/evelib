@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class SkillQueue.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class SkillQueue {
         /// <summary>
@@ -33,7 +32,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class Skill.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Skill {
             /// <summary>

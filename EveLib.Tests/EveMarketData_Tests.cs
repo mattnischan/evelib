@@ -3,10 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using eZet.EveLib.EveMarketDataModule;
 using eZet.EveLib.EveMarketDataModule.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace eZet.EveLib.Test {
-    [TestClass]
     public class EveMarketData_Tests {
         private const int RegionId = 10000002;
 
@@ -24,133 +23,137 @@ namespace eZet.EveLib.Test {
             _invalidOptions = new EmdOptions();
         }
 
-        [TestMethod]
+        [Fact]
         public void GetRecentUploads_ValidRequest_ValidResponse() {
             EmdResponse<RecentUploads> res = _api.GetRecentUploads(_validOptions, UploadType.Orders);
             RecentUploads.RecentUploadsEntry entry = res.Result.Uploads.First();
-            Assert.AreEqual(UploadType.Orders, entry.UploadType);
-            Assert.AreEqual(TypeId, res.Result.Uploads.First().TypeId);
-            Assert.AreEqual(RegionId, res.Result.Uploads.First().RegionId);
-            Assert.AreNotEqual("", entry.UploadType);
-            Assert.AreNotEqual("", entry.Updated);
+            Assert.Equal(UploadType.Orders, entry.UploadType);
+            Assert.Equal(TypeId, res.Result.Uploads.First().TypeId);
+            Assert.Equal(RegionId, res.Result.Uploads.First().RegionId);
+            Assert.NotEqual(default(UploadType), entry.UploadType);
+            Assert.NotEqual(default(DateTime), entry.Updated);
         }
 
-        [TestMethod]
+        [Fact]
         public async Task GetRecentUploadsAsync_ValidRequest_ValidResponse() {
             EmdResponse<RecentUploads> res =
                 await _api.GetRecentUploadsAsync(_validOptions, UploadType.Orders);
             RecentUploads.RecentUploadsEntry entry = res.Result.Uploads.First();
-            Assert.AreEqual(UploadType.Orders, entry.UploadType);
-            Assert.AreEqual(TypeId, res.Result.Uploads.First().TypeId);
-            Assert.AreEqual(RegionId, res.Result.Uploads.First().RegionId);
-            Assert.AreNotEqual("", entry.UploadType);
-            Assert.AreNotEqual("", entry.Updated);
+            Assert.Equal(UploadType.Orders, entry.UploadType);
+            Assert.Equal(TypeId, res.Result.Uploads.First().TypeId);
+            Assert.Equal(RegionId, res.Result.Uploads.First().RegionId);
+            Assert.NotEqual("", entry.UploadType);
+            Assert.NotEqual("", entry.Updated);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetRecentUploads_NoOptions_NoException() {
             EmdResponse<RecentUploads> res = _api.GetRecentUploads(_invalidOptions, UploadType.Orders);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetItemPrice_ValidRequest_ValidResponse() {
             EmdResponse<ItemPrices> res = _api.GetItemPrice(_validOptions, OrderType.Buy, MinMax.Min);
             ItemPrices.ItemPriceEntry entry = res.Result.Prices.First();
-            Assert.AreEqual(OrderType.Buy, entry.OrderType);
-            Assert.AreEqual(TypeId, entry.TypeId);
-            Assert.AreEqual(RegionId, entry.RegionId);
-            Assert.AreNotEqual(0, entry.Price);
-            Assert.AreNotEqual("", entry.OrderType);
-            Assert.AreNotEqual("", entry.Updated);
+            Assert.Equal(OrderType.Buy, entry.OrderType);
+            Assert.Equal(TypeId, entry.TypeId);
+            Assert.Equal(RegionId, entry.RegionId);
+            Assert.NotEqual(0, entry.Price);
+            Assert.NotEqual("", entry.OrderType);
+            Assert.NotEqual("", entry.Updated);
         }
 
 
-        [TestMethod]
+        [Fact]
         public async Task GetItemPriceAsync_ValidRequest_ValidResponse() {
             EmdResponse<ItemPrices> res =
                 await _api.GetItemPriceAsync(_validOptions, OrderType.Buy, MinMax.Min);
             ItemPrices.ItemPriceEntry entry = res.Result.Prices.First();
-            Assert.AreEqual(OrderType.Buy, entry.OrderType);
-            Assert.AreEqual(TypeId, entry.TypeId);
-            Assert.AreEqual(RegionId, entry.RegionId);
-            Assert.AreNotEqual(0, entry.Price);
-            Assert.AreNotEqual("", entry.OrderType);
-            Assert.AreNotEqual("", entry.Updated);
+            Assert.Equal(OrderType.Buy, entry.OrderType);
+            Assert.Equal(TypeId, entry.TypeId);
+            Assert.Equal(RegionId, entry.RegionId);
+            Assert.NotEqual(0, entry.Price);
+            Assert.NotEqual("", entry.OrderType);
+            Assert.NotEqual("", entry.Updated);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetItemPrice_NoOptions_NoException() {
             EmdResponse<ItemPrices> res = _api.GetItemPrice(_invalidOptions, OrderType.Buy, MinMax.Min);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetItemOrders_ValidRequest_ValidResponse() {
             EmdResponse<ItemOrders> res = _api.GetItemOrders(_validOptions, OrderType.Buy);
             ItemOrders.ItemOrderEntry entry = res.Result.Orders.First();
-            Assert.AreEqual(OrderType.Buy, entry.OrderType);
-            Assert.AreNotEqual(0, entry.OrderId);
-            Assert.AreEqual(TypeId, entry.TypeId);
-            Assert.AreEqual(RegionId, entry.RegionId);
-            Assert.AreNotEqual(0, entry.StationId);
-            Assert.AreNotEqual(0, entry.SolarSystemId);
-            Assert.AreNotEqual(0, entry.Price);
-            Assert.AreNotEqual(0, entry.VolEntered);
-            Assert.AreNotEqual(0, entry.VolRemaining);
-            Assert.AreNotEqual(0, entry.MinVolume);
-            Assert.AreNotEqual("", entry.IssuedDate);
-            Assert.AreNotEqual("", entry.ExpiresDate);
-            Assert.AreNotEqual("", entry.CreatedDate);
+            Assert.Equal(OrderType.Buy, entry.OrderType);
+            Assert.NotEqual(0, entry.OrderId);
+            Assert.Equal(TypeId, entry.TypeId);
+            Assert.Equal(RegionId, entry.RegionId);
+            Assert.NotEqual(0, entry.StationId);
+            Assert.NotEqual(0, entry.SolarSystemId);
+            Assert.NotEqual(0, entry.Price);
+            Assert.NotEqual(0, entry.VolEntered);
+            Assert.NotEqual(0, entry.VolRemaining);
+            Assert.NotEqual(0, entry.MinVolume);
+            Assert.NotEqual("", entry.IssuedDate);
+            Assert.NotEqual("", entry.ExpiresDate);
+            Assert.NotEqual("", entry.CreatedDate);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetItemOrders_NoOptions_NoException() {
             EmdResponse<ItemOrders> res = _api.GetItemOrders(_invalidOptions, OrderType.Buy);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetItemHistory_ValidRequest_ValidResponse() {
             EmdResponse<ItemHistory> res = _api.GetItemHistory(_validOptions);
             ItemHistory.ItemHistoryEntry entry = res.Result.History.First();
-            Assert.AreEqual(TypeId, entry.TypeId);
-            Assert.AreEqual(RegionId, entry.RegionId);
-            Assert.AreNotEqual(0, entry.AvgPrice);
-            Assert.AreNotEqual(0, entry.MaxPrice);
-            Assert.AreNotEqual(0, entry.MinPrice);
-            Assert.AreNotEqual(0, entry.Orders);
-            Assert.AreNotEqual(0, entry.Volume);
-            Assert.AreNotEqual("", entry.Date);
+            Assert.Equal(TypeId, entry.TypeId);
+            Assert.Equal(RegionId, entry.RegionId);
+            Assert.NotEqual(0, entry.AvgPrice);
+            Assert.NotEqual(0, entry.MaxPrice);
+            Assert.NotEqual(0, entry.MinPrice);
+            Assert.NotEqual(0, entry.Orders);
+            Assert.NotEqual(0, entry.Volume);
+            Assert.NotEqual("", entry.Date);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (Exception), AllowDerivedTypes = true)]
+        [Fact]
         public void GetItemHistory_InvalidArgument_ContractException() {
-            EmdResponse<ItemHistory> res = _api.GetItemHistory(_invalidOptions);
+            Assert.Throws<Exception>(() =>
+            {
+                EmdResponse<ItemHistory> res = _api.GetItemHistory(_invalidOptions);
+            });
         }
 
-        //[TestMethod]
+        //[Fact]
         public void GetStationRank_ValidRequest_ValidResponse() {
             EmdResponse<StationRank> res = _api.GetStationRank(_validOptions);
             StationRank.StationRankEntry entry = res.Result.Stations.First();
-            Assert.AreNotEqual(0, entry.StationId);
-            Assert.AreNotEqual("", entry.Date);
-            Assert.AreNotEqual(0, entry.RankByOrders);
-            Assert.AreNotEqual(0, entry.RankByPrice);
+            Assert.NotEqual(0, entry.StationId);
+            Assert.NotEqual("", entry.Date);
+            Assert.NotEqual(0, entry.RankByOrders);
+            Assert.NotEqual(0, entry.RankByPrice);
         }
 
-        //[TestMethod]
+        //[Fact]
         public async Task GetStationRank_ValidRequestAsync_ValidResponse() {
             EmdResponse<StationRank> res = await _api.GetStationRankAsync(_validOptions);
             StationRank.StationRankEntry entry = res.Result.Stations.First();
-            Assert.AreNotEqual(0, entry.StationId);
-            Assert.AreNotEqual("", entry.Date);
-            Assert.AreNotEqual(0, entry.RankByOrders);
-            Assert.AreNotEqual(0, entry.RankByPrice);
+            Assert.NotEqual(0, entry.StationId);
+            Assert.NotEqual("", entry.Date);
+            Assert.NotEqual(0, entry.RankByOrders);
+            Assert.NotEqual(0, entry.RankByPrice);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (Exception), AllowDerivedTypes = true)]
+        [Fact]
         public void GetStationRank_InvalidArgument_ContractException() {
-            EmdResponse<StationRank> res = _api.GetStationRank(_invalidOptions);
+            Assert.Throws<Exception>(() =>
+            {
+                EmdResponse<StationRank> res = _api.GetStationRank(_invalidOptions);
+            });
         }
     }
 }

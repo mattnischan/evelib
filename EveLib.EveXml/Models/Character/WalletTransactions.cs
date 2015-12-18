@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class WalletTransactions.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class WalletTransactions {
         /// <summary>
@@ -33,7 +32,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class Transaction.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Transaction {
             /// <summary>

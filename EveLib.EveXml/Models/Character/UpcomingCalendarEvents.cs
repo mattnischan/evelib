@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class UpcomingCalendarEvents.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class UpcomingCalendarEvents {
         /// <summary>
@@ -33,7 +32,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class Event.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Event {
             /// <summary>

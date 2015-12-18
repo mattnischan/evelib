@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class ContractBids.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class ContractBids {
         /// <summary>
@@ -33,7 +32,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class Bid.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Bid {
             /// <summary>

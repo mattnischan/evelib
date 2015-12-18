@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class CorporationSheet.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class CorporationSheet {
         /// <summary>
@@ -144,7 +143,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
         /// <summary>
         ///     Class Division.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Division {
             /// <summary>

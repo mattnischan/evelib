@@ -1,18 +1,17 @@
 ﻿using eZet.EveLib.EveXmlModule;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace eZet.EveLib.Test {
-    [TestClass]
     public class Image_Tests {
         private const long CharId = 797400947;
         private readonly Image image = new Image();
 
-        [TestMethod]
+        [Fact]
         public void GetCharacterPortrait_ValidRequest_NoExceptions() {
             //image.GetCharacterPortrait(CharId, Image.CharacterPortraitSize.X256);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetCharacterPortraitData_ValidRequest_NoExceptions() {
             image.GetCharacterPortraitData(CharId, Image.CharacterPortraitSize.X30);
         }

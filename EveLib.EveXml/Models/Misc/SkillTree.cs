@@ -22,7 +22,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Represents the skill tree
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class SkillTree {
         /// <summary>
@@ -35,7 +34,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
         /// <summary>
         ///     Class RequiredAttribute.
         /// </summary>
-        [Serializable]
         [XmlRoot("requiredAttributes")]
         public class RequiredAttribute {
             /// <summary>
@@ -56,7 +54,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
         /// <summary>
         ///     Class RequiredSkill.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class RequiredSkill {
             /// <summary>
@@ -77,7 +74,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
         /// <summary>
         ///     Class Skill.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Skill : IXmlSerializable {
             /// <summary>
@@ -189,7 +185,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
         /// <summary>
         ///     Class SkillBonus.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class SkillBonus {
             /// <summary>
@@ -210,7 +205,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
         /// <summary>
         ///     Class SkillGroup.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class SkillGroup {
             /// <summary>

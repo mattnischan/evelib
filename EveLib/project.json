@@ -1,6 +1,19 @@
-{ 
-	"frameworks": {
-		"net45": { },
-		"dnxcore5": { }
-	}
+{
+  "version": "3.1.0-beta-*",
+  "dependencies": {
+    "EveLib.EveXml": "",
+    "EveLib.Core": "",
+    "EveLib.EveWho": "",
+    "EveLib.EveStaticData": "",
+    "EveLib.EveMarketData": "",
+    "EveLib.EveCrest": "",
+    "EveLib.EveCentral": "",
+    "EveLib.EveAuth": "",
+    "EveLib.Element43": "",
+    "EveLib.CrestClient": ""
+  },
+  "frameworks": {
+    "net451": { },
+    "dotnet5.4": { }
+  }
 }

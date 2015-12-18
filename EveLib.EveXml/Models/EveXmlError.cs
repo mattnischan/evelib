@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveXmlModule.Models {
     /// <summary>
     ///     Class EveXmlError.
     /// </summary>
-    [Serializable]
     [XmlRoot("eveapi", IsNullable = false)]
     public class EveXmlError {
         /// <summary>

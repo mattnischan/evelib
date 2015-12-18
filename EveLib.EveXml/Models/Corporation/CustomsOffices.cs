@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class CustomsOffices.
     /// </summary>
-    [Serializable]
     [XmlRoot("result")]
     public class CustomsOffices {
         /// <summary>

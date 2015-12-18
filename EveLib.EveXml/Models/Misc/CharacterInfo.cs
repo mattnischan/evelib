@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class CharacterInfo.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class CharacterInfo {
         /// <summary>
@@ -172,7 +171,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
         /// <summary>
         ///     Represents a employment entry
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Employment {
             /// <summary>

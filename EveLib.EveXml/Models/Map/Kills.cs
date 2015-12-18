@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Map {
     /// <summary>
     ///     Class Kills.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class Kills {
         /// <summary>
@@ -33,7 +32,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Map {
         /// <summary>
         ///     Class SolarSystem.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class SolarSystem {
             /// <summary>

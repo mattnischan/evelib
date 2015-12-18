@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class OutpostList.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class OutpostList {
         /// <summary>
@@ -32,7 +31,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
         /// <summary>
         ///     Class Outpost.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Outpost {
             /// <summary>

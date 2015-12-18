@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Account {
     /// <summary>
     ///     Class ApiKeyInfo.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class ApiKeyInfo {
         /// <summary>
@@ -78,7 +77,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Account {
         /// <summary>
         ///     Class ApiKeyEntity.
         /// </summary>
-        [Serializable]
         [XmlRoot("row", IsNullable = false)]
         public class ApiKeyEntity {
             /// <summary>

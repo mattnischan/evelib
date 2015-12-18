@@ -22,8 +22,7 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class StandingsList.
     /// </summary>
-    [Serializable]
-    [XmlRoot("result", IsNullable = false)]
+        [XmlRoot("result", IsNullable = false)]
     public class StandingsList {
         /// <summary>
         ///     Gets or sets the corporation standings.
@@ -36,8 +35,7 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
         /// <summary>
         ///     Class StandingEntry.
         /// </summary>
-        [Serializable]
-        [XmlRoot("row")]
+                [XmlRoot("row")]
         public class StandingEntry {
             /// <summary>
             ///     Gets or sets from identifier.

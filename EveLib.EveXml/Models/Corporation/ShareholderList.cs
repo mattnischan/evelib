@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class ShareholderList.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class ShareholderList {
         /// <summary>
@@ -33,7 +32,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
         /// <summary>
         ///     Class Shareholder.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Shareholder {
             /// <summary>

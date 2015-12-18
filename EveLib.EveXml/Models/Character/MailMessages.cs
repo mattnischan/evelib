@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class MailMessages.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class MailMessages {
         /// <summary>
@@ -33,7 +32,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class Message.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Message {
             /// <summary>

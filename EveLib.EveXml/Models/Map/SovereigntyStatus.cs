@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Map {
     /// <summary>
     ///     Class SovereigntyStatus.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class SovereigntyStatus {
         /// <summary>

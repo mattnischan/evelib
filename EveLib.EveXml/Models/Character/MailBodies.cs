@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class MailBodies.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class MailBodies {
         /// <summary>
@@ -39,7 +38,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class Message.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Message {
             /// <summary>

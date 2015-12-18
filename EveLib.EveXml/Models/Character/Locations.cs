@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class Locations.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class Locations {
         /// <summary>
@@ -32,7 +31,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class Location.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Location {
             /// <summary>

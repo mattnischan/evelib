@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class ContractItems.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class ContractItems {
         /// <summary>
@@ -33,7 +32,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class ContractItem.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class ContractItem {
             /// <summary>

@@ -23,7 +23,6 @@ namespace eZet.EveLib.EveXmlModule.Models {
     ///     Class EveXmlRowCollection.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    [Serializable]
     [XmlRoot("rowset")]
     public class EveXmlRowCollection<T> : Collection<T>, IXmlSerializable {
         /// <summary>

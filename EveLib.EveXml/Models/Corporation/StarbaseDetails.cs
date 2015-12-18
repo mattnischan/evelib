@@ -20,8 +20,7 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
     /// <summary>
     ///     Class StarbaseDetails.
     /// </summary>
-    [Serializable]
-    [XmlRoot("result", IsNullable = false)]
+        [XmlRoot("result", IsNullable = false)]
     public class StarbaseDetails {
         /// <summary>
         ///     Gets or sets the state.
@@ -89,8 +88,7 @@ namespace eZet.EveLib.EveXmlModule.Models.Corporation {
         /// <summary>
         ///     Class FuelEntry.
         /// </summary>
-        [Serializable]
-        [XmlRoot("row")]
+                [XmlRoot("row")]
         public class FuelEntry {
             /// <summary>
             ///     Gets or sets the type identifier.

@@ -22,7 +22,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
     /// <summary>
     ///     Class ContactList.
     /// </summary>
-    [Serializable]
     [XmlRoot("result", IsNullable = false)]
     public class ContactList : IXmlSerializable {
         /// <summary>
@@ -109,7 +108,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class ContactLabel.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class ContactLabel {
             /// <summary>
@@ -130,7 +128,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Character {
         /// <summary>
         ///     Class Contact.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class Contact {
             /// <summary>

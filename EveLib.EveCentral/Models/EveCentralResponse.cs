@@ -19,7 +19,6 @@ namespace eZet.EveLib.EveCentralModule.Models {
     /// <summary>
     ///     Class EveCentralResponse.
     /// </summary>
-    [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(ElementName = "evec_api", Namespace = "", IsNullable = false)]
     public class EveCentralResponse {

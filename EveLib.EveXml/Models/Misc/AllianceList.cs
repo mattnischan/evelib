@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
     /// <summary>
     ///     Class AllianceList.
     /// </summary>
-    [Serializable]
     [XmlRoot("result")]
     public class AllianceList {
         /// <summary>
@@ -33,7 +32,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
         /// <summary>
         ///     Class AllianceData.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class AllianceData {
             /// <summary>
@@ -100,7 +98,6 @@ namespace eZet.EveLib.EveXmlModule.Models.Misc {
         /// <summary>
         ///     Class CorporationData.
         /// </summary>
-        [Serializable]
         [XmlRoot("row")]
         public class CorporationData {
             /// <summary>

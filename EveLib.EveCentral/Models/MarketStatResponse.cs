@@ -20,7 +20,6 @@ namespace eZet.EveLib.EveCentralModule.Models {
     /// <summary>
     ///     Class MarketStatResponse.
     /// </summary>
-    [Serializable]
     [XmlType(AnonymousType = true)]
     [XmlRoot(ElementName = "evec_api", Namespace = "", IsNullable = false)]
     public class MarketStatResponse : EveCentralResponse {
